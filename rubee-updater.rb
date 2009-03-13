@@ -24,11 +24,11 @@ include_gems.each { |x| gem_list << [x, ['>= 0']] }
 gem_list.each do |x|
   x[1].each do |y|
     #puts "#{x[0]} --version '#{y}'"
-    system("gem install #{x[0]} --version '#{y}' --no-ri --no-rdoc")
+    system("/opt/rubee/bin/gem install #{x[0]} --version '#{y}' --no-ri --no-rdoc")
   end
 end
 
-File.open('/etc/apache2/passenger.conf', 'w') do |f|
+File.open('/etc/apache2/conf.d/passenger', 'w') do |f|
   f.puts 'LoadModule passenger_module /opt/rubee/lib/ruby/gems/1.8/gems/passenger-2.0.6/ext/apache2/mod_passenger.so'
   f.puts 'PassengerRoot /opt/rubee/lib/ruby/gems/1.8/gems/passenger-2.0.6'
   f.puts 'PassengerRuby /opt/rubee/bin/ruby'
